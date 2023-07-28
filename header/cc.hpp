@@ -34,8 +34,23 @@ public:
         return money;
     }
 
-    int getThenumberOfcoins(int value)
+    int getThenumberOfcoins()
     {
-        
+        int result = 0;
+        for (int i = 0; i < money.size(); i++)
+        {
+            int x = money.top();
+            if (value == 0)
+                return result;
+            if (value - x < 0)
+                return -1;
+            while (value - x >= 0)
+            {
+                value -= x;
+                result++;
+            }
+            money.pop();
+        }
+        return -1;
     }
 };
