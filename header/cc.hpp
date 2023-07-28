@@ -34,23 +34,32 @@ public:
         return money;
     }
 
-    int getThenumberOfcoins()
+    void nextMoneyValue()
     {
-        int result = 0;
-        for (int i = 0; i < money.size(); i++)
+        if (this->value - this->money.top() < 0)
         {
-            int x = money.top();
-            if (value == 0)
-                return result;
-            if (value - x < 0)
-                return -1;
-            while (value - x >= 0)
-            {
-                value -= x;
-                result++;
-            }
             money.pop();
         }
-        return -1;
+    }
+
+    int getThenumberOfcoins(int value)
+    {
+        //cout << money.top() <<endl;
+        if (value == 0)
+            return 0;
+        if (money.empty())
+            return -1;
+        
+        if (value - money.top() >= 0)
+        {
+            int result = value / money.top();
+            value -= (result * money.top());
+            return result + this->getThenumberOfcoins(value);
+        }
+        else
+        {
+            money.pop();
+            return this->getThenumberOfcoins(value);
+        }
     }
 };

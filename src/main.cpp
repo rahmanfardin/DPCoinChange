@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     stack<int> money;
-    cout << "enter the money: " << endl; 
+    cout << "enter the money(enter -1 to finish entering): " << endl; 
     int value = 0;
     while (value!= -1)
     {
@@ -19,6 +19,6 @@ int main()
     int x;
     cin >> x;
     cc *coin = new cc(x, money);
-    int result = coin->getThenumberOfcoins();
+    int result = coin->getThenumberOfcoins(coin->getValue());
     cout << result << endl;
 }
