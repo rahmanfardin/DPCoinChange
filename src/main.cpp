@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    stack<int> money;
+    vector<int> money;
     int value = 0, x = 0;
     vector<int> dp(100, -1);
     cc *coin;
@@ -16,9 +16,9 @@ int main()
     while (value != -1)
     {
         cin >> value;
-        money.push(value);
+        money.push_back(value);
     }
-    money.pop();
+    money.pop_back();
     coin = new cc(x, money, dp);
     for (int i = 0; i < 2; i++)
     {

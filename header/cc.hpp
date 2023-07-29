@@ -6,12 +6,12 @@ using namespace std;
 class cc
 {
 private:
-    int value;        // value of the the money we have to exchange
-    stack<int> money; // the set of money
-    vector<int> dp;   // a dp vector
+    int value;         // value of the the money we have to exchange
+    vector<int> money; // the set of money
+    vector<int> dp;    // a dp vector
 
 public:
-    cc(int value, stack<int> money, vector<int> dp)
+    cc(int value, vector<int> money, vector<int> dp)
     {
         this->value = value;
         this->money = money;
@@ -29,42 +29,30 @@ public:
         return value;
     }
 
-    void setMoney(stack<int> money)
+    void setMoney(vector<int> money)
     {
         this->money = money;
     }
-    stack<int> getMoney()
+    vector<int> getMoney()
     {
         return money;
     }
 
-    int getThenumberOfcoins(int value)
+    int coins(int value)
     {
-        //! create a new money so that we can save the original value
-        stack<int> money1;
-        money1 = money;
-        // cout << money.top() <<endl;
         if (value == 0)
             return 0;
-        if (money1.empty())
-            return -1;
-        if (dp.at(value) != -1)
+        int ans = INT_MAX;
+        for (int i : money)
         {
-            cout << "s";
-            return dp.at(value);
+            if (value - i >= 0)
+                ans = min(ans, coins(value - i) + 1);
         }
-        if (value - money1.top() >= 0)
-        {
-            int result = value / money1.top();
-            dp.at(value) = result;
-            value -= (result * money1.top());
-            cout << dp.at(value) << endl;
-            return result + this->getThenumberOfcoins(value);
-        }
-        else
-        {
-            money1.pop();
-            return this->getThenumberOfcoins(value);
-        }
+        return ans;
+    }
+    int getThenumberOfcoins(int value)
+    {
+        int ans = coins(value);
+        return ans == INT_MAX ? -1 : ans;
     }
 };
