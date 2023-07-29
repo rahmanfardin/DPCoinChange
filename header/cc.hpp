@@ -43,12 +43,17 @@ public:
         if (value == 0)
             return 0;
         int ans = INT_MAX;
+        if (dp[value] != -1)
+        {
+            cout <<value<< "="<< dp.at(value) << endl;
+            return dp[value];
+        }
         for (int i : money)
         {
             if (value - i >= 0)
                 ans = min(ans, coins(value - i) + 1);
         }
-        return ans;
+        return dp[value] = ans;
     }
     int getThenumberOfcoins(int value)
     {
